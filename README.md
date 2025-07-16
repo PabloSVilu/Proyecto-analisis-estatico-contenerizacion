@@ -20,17 +20,24 @@ Instrucciones:
 
 - Para probar las herramientas de analisis estatico, instale las herramientas con los siguientes comandos.
 
+```bash
   pip install pylint
   pip install radon
+```
 
 - Una vez instaladas dirijase con su consola de comandos a la carpeta Backend, y use los siguientes comandos:
 
+```bash
   py pylint.py "nombre de archivo que quiera analizar".py
   py radon.py "nombre de archivo que quiera analizar".py
+```
 
 - Ejemplo
+
+```bash
   py pylint.py main.py
   py radon.py main.py
+```
 
 - Finalmente le mostrar por consola o por el archivo pylint-report.txt" y/o "radon-report.txt"los resultados de los analisis respectivamente.
 
