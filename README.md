@@ -1,10 +1,10 @@
-Proyecto: análisis estático, contenerización
+# Proyecto: análisis estático, contenerización
 
 El proyecto es una aplicacion web para ver el clima, en la cual uno puede registrarse con un correo, quedando asi registrado en la base de datos.
 La aplicacion tambien recomienda actividades dependiendo del estado climatico, temperatura actual, humedad y velocidad del viento.
 Un usario registrado puede crear actividades personalizadas o marcar como favorito alguna de las actividades predeterminadas.
 
-Instrucciones:
+## Instrucciones:
 
 - Asegurese de tener descargado la ultima version de python
 
@@ -32,7 +32,7 @@ Instrucciones:
   py radon.py "nombre de archivo que quiera analizar".py
 ```
 
-- Ejemplo
+## Ejemplo
 
 ```bash
   py pylint.py main.py
