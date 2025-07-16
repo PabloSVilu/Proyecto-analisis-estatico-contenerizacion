@@ -8,34 +8,31 @@ Instrucciones:
 
 - Asegurese de tener descargado la ultima version de python
 
--Descargue/instale Docker Desktop para su sistema operativo y inicie la apliacacion.
+- Descargue/instale Docker Desktop para su sistema operativo y inicie la apliacacion.
 
--Abra su consola de comandos preferida.
+- Abra su consola de comandos preferida.
 
--En la consola de comandos dirijase a la carpeta del proyecto, o simplemente donde se ubique el archivo "docker-compose-yml".
+- En la consola de comandos dirijase a la carpeta del proyecto, o simplemente donde se ubique el archivo "docker-compose-yml".
 
--En la consola ingrese el siguiente comando docker-compose up --build , para crear el build del proyecto en Docker.
+- En la consola ingrese el siguiente comando docker-compose up --build , para crear el build del proyecto en Docker.
 
--Una vez terminado el proceso anterior la aplicacion ya esta lista para su uso, puede ingresar a esta a atravez des mismo Docker o con el siguiente link: localhost:5173.
+- Una vez terminado el proceso anterior la aplicacion ya esta lista para su uso, puede ingresar a esta a atravez des mismo Docker o con el siguiente link: localhost:5173.
 
--Para probar las herramientas de analisis estatico, instale las herramientas con los siguientes comandos.
+- Para probar las herramientas de analisis estatico, instale las herramientas con los siguientes comandos.
 
-    	pip install pylint
-    	pip install radon
+  pip install pylint
+  pip install radon
 
--Una vez instaladas dirijase con su consola de comandos a la carpeta Backend, y use los siguientes comandos:
+- Una vez instaladas dirijase con su consola de comandos a la carpeta Backend, y use los siguientes comandos:
 
-	 py pylint.py "nombre de archivo que quiera analizar".py 
- 	py radon.py "nombre de archivo que quiera analizar".py 
+  py pylint.py "nombre de archivo que quiera analizar".py
+  py radon.py "nombre de archivo que quiera analizar".py
 
-Ejemplo
- 	py pylint.py main.py
-	py radon.py main.py
+- Ejemplo
+  py pylint.py main.py
+  py radon.py main.py
 
--Finalmente le mostrar por consola o por el archivo pylint-report.txt" y/o "radon-report.txt"los resultados de los analisis respectivamente.
-
-
+- Finalmente le mostrar por consola o por el archivo pylint-report.txt" y/o "radon-report.txt"los resultados de los analisis respectivamente.
 
 Imagen de ejemplo de como se ve la aplicacion:
 ![image](https://github.com/user-attachments/assets/e7d1aae1-1979-47b8-869c-fb8c014c3c33)
-
