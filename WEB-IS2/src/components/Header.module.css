@@ -1,0 +1,153 @@
+/* src/components/Header.module.css */
+.appHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  /* Fondo semitransparente para el header */
+  background-color: rgba(31, 41, 55, 0.75); /* Ajusta la opacidad (0.75) como prefieras */
+  backdrop-filter: blur(8px); /* Efecto de desenfoque para el fondo del header */
+  -webkit-backdrop-filter: blur(8px); /* Para compatibilidad con Safari */
+  color: #e5e7eb;
+  border-bottom: 1px solid #374151;
+  position: sticky; /* Header fijo en la parte superior */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Asegurar que esté por encima de otros elementos */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra sutil para el header */
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.searchContainer {
+  position: relative;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+}
+
+.searchInput {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #4b5563;
+  border-radius: 0.375rem 0 0 0.375rem;
+  background-color: #374151;
+  color: #e5e7eb;
+  font-size: 0.9rem;
+  min-width: 200px;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #60a5fa;
+  background-color: #4b5563;
+}
+
+.searchButton {
+  padding: 0.5rem 0.75rem;
+  background-color: #4b5563;
+  border: 1px solid #4b5563;
+  border-left: none;
+  border-radius: 0 0.375rem 0.375rem 0;
+  color: #e5e7eb;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s ease-out; /* Transición para hover */
+}
+
+.searchButton:hover {
+  background-color: #6b7280;
+  transform: scale(1.1); /* Efecto zoom */
+}
+
+.searchResults {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #374151;
+  border: 1px solid #4b5563;
+  border-top: none;
+  border-radius: 0 0 0.375rem 0.375rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000; /* Por encima del contenido, pero debajo del header si es necesario */
+  color: #e5e7eb;
+}
+
+.searchResults li {
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s; /* Transición para hover en resultados */
+}
+
+.searchResults li:hover {
+  background-color: #4b5563;
+}
+
+
+.cityPresets {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.cityPresetButton {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  border-radius: 0.25rem; /* Pequeño borde redondeado */
+  transition: color 0.2s, transform 0.2s ease-out; /* Transición para hover */
+}
+
+.cityPresetButton:hover {
+  color: #e5e7eb;
+  transform: scale(1.1); /* Efecto zoom */
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.authLink {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem; /* Padding para mejor área de click y visualización del scale */
+  border-radius: 0.375rem; /* Coherencia con otros botones */
+  transition: color 0.2s, transform 0.2s ease-out; /* Transición para hover */
+}
+
+.authLink:hover {
+  color: #e5e7eb;
+  transform: scale(1.1); /* Efecto zoom */
+  background-color: rgba(75, 85, 99, 0.3); /* Ligero fondo en hover para destacar más */
+}
+
+.logoutLink {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  transition: color 0.2s, transform 0.2s ease-out;
+}
+
+.logoutLink:hover {
+  color: #e5e7eb;
+  transform: scale(1.1);
+}

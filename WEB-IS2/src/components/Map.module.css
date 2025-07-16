@@ -1,0 +1,13 @@
+/* src/components/Map.module.css */
+.mapContainerRounded {
+  height: 200px; /* O la altura que desees */
+  width: 100%;
+  border-radius: 0.75rem; /* ej. 12px o 0.75rem */
+  overflow: hidden; /* ¡Muy importante! */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Sombra opcional para darle profundidad */
+  border: 1px solid #374151; /* Borde sutil opcional, si quieres que se vea */
+}
+
+.mapContainerRounded .leaflet-container {
+  border-radius: inherit; /* Hereda el border-radius del padre */
+}

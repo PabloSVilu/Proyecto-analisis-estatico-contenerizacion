@@ -1,0 +1,364 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* Degradado de azul claro (arriba) a azul más oscuro (abajo) */
+  /* background: linear-gradient(to bottom, #4A90E2, #0A2749); */ /* Azul claro a oscuro */
+  /* background: linear-gradient(to bottom, #3b82f6, #1d4ed8); */ /* Tailwind Blue 500 a Blue 700 */
+  background: linear-gradient(to bottom, #000d28, #000000); /* Tailwind Blue 600 a Blue 800 - Opción más oscura */
+  
+  background-attachment: fixed; /* El degradado no se scrollea con el contenido */
+  color: #e5e7eb; /* Color de texto claro por defecto, ajustado para contraste */
+  line-height: 1.5;
+  overflow-x: hidden; /* Previene el scroll horizontal en el body */
+  min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura */
+}
+
+* {
+  box-sizing: border-box; /* Padding y border no añaden al tamaño total */
+}
+
+a {
+  color: #93c5fd; /* Azul más claro para enlaces, mejor contraste */
+  text-decoration: none;
+  transition: color 0.2s, transform 0.2s ease-out;
+}
+a:hover {
+  color: #bfdbfe; /* Aún más claro en hover */
+  text-decoration: underline;
+  transform: scale(1.05); /* Efecto zoom sutil para enlaces */
+}
+
+/* Contenedor principal de la aplicación */
+.appContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilos para la página Inicio (Dashboard) */
+.inicioDashboard {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; 
+}
+
+.mainDashboardContent {
+  display: flex;
+  flex-grow: 1;
+  padding: 1.5rem;
+  gap: 1.5rem;
+  max-width: 1400px; 
+  margin: 0 auto; 
+  width: 100%; 
+}
+
+.leftColumn {
+  flex: 3; 
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 0; 
+}
+
+.rightColumn {
+  flex: 2; 
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 0; 
+}
+
+/* Estilos para Tarjetas (reutilizando tu componente) */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Un poco más anchas las tarjetas */
+  gap: 1.5rem; /* Mayor separación */
+}
+
+.card {
+  background-color: rgba(31, 41, 55, 0.7); /* Fondo de tarjeta oscuro con transparencia */
+  backdrop-filter: blur(5px); /* Efecto blur si el fondo de la tarjeta es transparente */
+  border: 1px solid #374151; 
+  border-radius: 0.75rem; /* Bordes más redondeados */
+  padding: 1.5rem;
+  text-align: left; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Sombra más pronunciada */
+  transition: box-shadow 0.3s ease, transform 0.2s ease-out, border-color 0.2s ease-out;
+  cursor: pointer; /* Indica que la tarjeta es clickeable */
+}
+
+.card:hover, .card:focus-visible { /* :focus-visible para accesibilidad con teclado */
+  transform: translateY(-5px) scale(1.02); /* Efecto de elevación y ligero zoom */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  border-color: #60a5fa; /* Resaltar borde en hover/focus */
+  outline: none; /* Quitar outline por defecto si se usa border-color */
+}
+
+
+.card h3 {
+  font-weight: 600;
+  font-size: 1.1rem; 
+  margin-top: 0;
+  margin-bottom: 0.5rem; 
+  color: #93c5fd; /* Azul claro para títulos de tarjeta */
+}
+
+.card p {
+  color: #cbd5e1; /* Texto de párrafo más claro */
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+/* Estados de carga y error de página completa */
+.fullPageLoading, .fullPageError {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 1.5rem;
+  color: #cbd5e1; /* Texto más claro para mensajes de carga/error */
+  padding: 2rem;
+  text-align: center;
+}
+
+.loadingMessage { /* Para mensajes de carga dentro de secciones */
+  text-align: center;
+  padding: 1rem;
+  color: #9ca3af;
+  font-style: italic;
+  width: 100%; /* Para que ocupe el espacio si es el único elemento */
+}
+
+
+/* Media Query para pantallas más pequeñas (ejemplo para apilar columnas) */
+@media (max-width: 992px) { 
+  .mainDashboardContent {
+    flex-direction: column;
+  }
+  .leftColumn, .rightColumn {
+    flex: 1 1 100%; 
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainDashboardContent {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .cardGrid {
+    grid-template-columns: 1fr; /* Una columna en móviles */
+  }
+  .appHeader { /* Reducir padding del header en móviles */
+    padding: 0.75rem 1rem;
+  }
+  .cityPresets { /* Ocultar presets en pantallas muy pequeñas o hacerlos scrolleables */
+    display: none; 
+    /* O:
+    overflow-x: auto;
+    max-width: 150px; 
+    white-space: nowrap;
+    */
+  }
+  .searchInput {
+    min-width: 150px; /* Reducir ancho del input de búsqueda */
+  }
+}
+
+/* Estilos para el Modal de Actividad Detallada */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85); /* Fondo oscuro semitransparente, un poco más opaco */
+  backdrop-filter: blur(8px); /* Desenfoque del fondo más pronunciado */
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; /* Asegurar que esté por encima de todo */
+  padding: 1rem; /* Espacio para que el modal no toque los bordes en pantallas pequeñas */
+}
+
+.modalContent {
+  background-color: #111827; /* Fondo aún más oscuro para el modal, casi negro */
+  color: #e5e7eb; /* Texto claro */
+  padding: 2rem;
+  border-radius: 0.75rem; /* Bordes redondeados */
+  border: 1px solid #374151; /* Borde sutil */
+  box-shadow: 0 15px 40px rgba(0,0,0,0.5); /* Sombra muy pronunciada para efecto flotante */
+  max-width: 650px; /* Ancho máximo del modal un poco mayor */
+  width: 100%;
+  max-height: 90vh; /* Altura máxima, permite scroll interno si es necesario */
+  overflow-y: auto; /* Scroll si el contenido es muy largo */
+  position: relative; /* Para posicionar el botón de cerrar absoluto a este contenedor */
+  animation: fadeInScale 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); /* Animación de entrada más suave */
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 0.75rem; /* Un poco más abajo */
+  right: 0.75rem; /* Un poco más a la izquierda */
+  background: rgba(55, 65, 81, 0.5); /* Fondo semitransparente para el botón */
+  border: 1px solid #4b5563;
+  border-radius: 50%; /* Botón redondo */
+  color: #cbd5e1; /* Color del icono X */
+  font-size: 1.25rem; /* Tamaño del 'x' */
+  font-weight: bold;
+  cursor: pointer;
+  width: 32px; /* Ancho y alto fijos para círculo */
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.modalCloseButton:hover, .modalCloseButton:focus-visible {
+  background-color: rgba(75, 85, 99, 0.8);
+  color: #f9fafb; /* Blanco en hover */
+  transform: scale(1.1);
+  outline: none;
+}
+
+.modalContent h2 {
+  font-size: 1.85rem; /* Un poco más grande */
+  color: #60a5fa; /* Azul claro, como los títulos de las tarjetas */
+  margin-top: 0;
+  margin-bottom: 1rem; /* Mayor separación */
+  padding-bottom: 0.75rem; /* Mayor padding */
+  border-bottom: 1px solid #374151;
+  font-weight: 700; /* Más bold */
+}
+
+.modalDescription {
+  font-size: 1rem;
+  color: #d1d5db; /* Un gris un poco más claro */
+  margin-bottom: 1.75rem; /* Mayor separación */
+  line-height: 1.7; /* Mayor interlineado */
+}
+
+.modalSection {
+  margin-bottom: 1.75rem;
+}
+
+.modalSection h4 {
+  font-size: 1.15rem; /* Un poco más grande */
+  color: #93c5fd; /* Mismo color que títulos de tarjeta para consistencia */
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.modalSection ul {
+  list-style: none; /* Quitar viñetas por defecto */
+  padding-left: 0; 
+  margin: 0;
+}
+
+.modalSection ul li {
+  font-size: 0.95rem; /* Un poco más grande */
+  color: #cbd5e1;
+  margin-bottom: 0.6rem; /* Mayor separación entre items */
+  line-height: 1.6;
+  padding-left: 1.5rem; /* Espacio para pseudo-elemento */
+  position: relative;
+}
+
+.modalSection ul li::before {
+  content: '▹'; /* Viñeta personalizada */
+  position: absolute;
+  left: 0;
+  color: #60a5fa; /* Color de la viñeta */
+  font-weight: bold;
+}
+
+/* Estilos para la sección de condiciones ideales narrativas */
+.modalIdealConditions {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #374151;
+  font-size: 0.95rem; 
+  color: #cbd5e1; 
+  line-height: 1.7;
+  text-align: center; 
+}
+
+.highlightedText {
+  color: #93c5fd; 
+  font-weight: 600; 
+  /* Opcional: más énfasis */
+  /* background-color: rgba(96, 165, 250, 0.1); */
+  /* padding: 0.1em 0.3em; */
+  /* border-radius: 0.2em; */
+}
+
+
+/* Media Query para modal en móviles */
+@media (max-width: 768px) {
+  .modalContent {
+    padding: 1.5rem;
+    max-height: 95vh;
+  }
+  .modalContent h2 {
+    font-size: 1.6rem;
+  }
+  .modalCloseButton {
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.1rem;
+    width: 28px;
+    height: 28px;
+  }
+  .modalIdealConditions {
+    font-size: 0.9rem; /* Ajustar tamaño para móviles si es necesario */
+  }
+}
+
+/* Estilos para tarjetas no recomendadas */
+.cardNoRecomendada {
+  background-color: rgba(127, 29, 29, 0.5); 
+  border-color: #ef4444;
+}
+
+.cardNoRecomendada:hover {
+  border-color: #f87171;
+}
+
+.noRecomendadaBadge {
+  display: inline-block;
+  margin-left: 0.75rem;
+  background-color: #ef4444;
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.clickInfo {
+  margin-top: 0.5rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+.favoriteStar {
+  color: gold;
+  font-size: 1.3rem;
+  margin-left: 0.5rem;
+}

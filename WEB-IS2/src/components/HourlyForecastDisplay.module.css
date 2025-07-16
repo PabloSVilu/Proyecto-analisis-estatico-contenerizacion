@@ -1,0 +1,71 @@
+/* src/components/HourlyForecastDisplay.module.css */
+.hourlyForecastSection {
+  background-color: #1f2937;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: #d1d5db;
+  width: 100%; /* Asegura que el contenedor principal de esta sección ocupe el ancho disponible */
+  /* box-sizing: border-box; Ya está global */
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f9fafb;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #374151; 
+}
+
+.hourlyScrollContainer {
+  display: flex;
+  overflow-x: auto; /* Permite scroll horizontal INTERNO para las horas */
+  gap: 1rem;
+  padding: 0.5rem 0.25rem; /* Un poco de padding para que no pegue a los bordes */
+  width: 100%; /* El contenedor de scroll debe ocupar el ancho del .hourlyForecastSection */
+  /* box-sizing: border-box; Ya está global */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hourlyScrollContainer::-webkit-scrollbar {
+  display: none;
+}
+/* ... (el resto de .hourItem, etc. se mantiene) ... */
+.loading {
+  text-align: center;
+  padding: 1rem;
+}
+
+.hourItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  background-color: #374151;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  min-width: 80px;
+  text-align: center;
+}
+
+.hourTime {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.hourIcon {
+  width: 35px;
+  height: 35px;
+}
+
+.hourTemp {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #f9fafb;
+}
+
+.hourPop {
+  font-size: 0.75rem;
+  color: #60a5fa;
+}

@@ -1,0 +1,100 @@
+.buttonLikeNotification {
+  position: absolute; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 2rem; 
+  font-size: 1rem;     
+  font-weight: 600;  
+  border-radius: 0.5rem; 
+  cursor: default; 
+  text-align: center;
+  z-index: 15; 
+  
+  background-color: #4A5568; /* Color base antes de aplicar tipo */
+  color: white;
+  
+  left: 50%; 
+  top: 50%;  
+  /* El transform inicial se maneja en @keyframes ahora */
+  opacity: 100%; /* Inicia invisible */
+  transform: translate(-50%, -50%) scale(0.5); /* Estado inicial antes de .show */
+  transform-origin: center center; 
+
+  /* Transiciones para propiedades que NO están en la animación @keyframes principal de entrada */
+  transition: background-color 0.2s ease-out,
+              color 0.2s ease-out;
+  /* La opacidad y transform para la entrada están en @keyframes scaleUpAndWobble */
+  /* La opacidad y transform para la salida están en .fadeOut y su transición */
+  
+  width: auto; 
+  min-width: fit-content; 
+  white-space: nowrap; 
+}
+
+.buttonLikeNotification.show {
+  /* La animación @keyframes se aplica aquí */
+  animation: scaleUpAndWobble 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  /* 'forwards' es importante para mantener el estado final de la animación */
+}
+
+.buttonLikeNotification.fadeOut {
+  opacity: 0 !important; 
+  transform: translate(-50%, -50%) scale(0.8) !important; /* O scale(0.5) para volver al origen */
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out !important; 
+}
+
+/* Estilos por tipo de notificación */
+.buttonLikeNotification.success.show,
+.buttonLikeNotification.success.visible { /* Aplicar también cuando es 'visible' sin animar entrada */
+  background-color: #28a745;
+  color: white;
+}
+
+.buttonLikeNotification.error.show,
+.buttonLikeNotification.error.visible {
+  background-color: #dc3545;
+  color: white;
+}
+
+.buttonLikeNotification.info.show,
+.buttonLikeNotification.info.visible {
+  background-color: #17a2b8;
+  color: white;
+}
+
+@keyframes wobble {
+  0%, 100% {
+    transform: translateX(-50%) scale(1.1) rotate(0deg);
+  }
+  15% {
+    transform: translateX(-50%) scale(1.1) rotate(-5deg);
+  }
+  30% {
+    transform: translateX(-50%) scale(1.1) rotate(3deg);
+  }
+  45% {
+    transform: translateX(-50%) scale(1.1) rotate(-3deg);
+  }
+  60% {
+    transform: translateX(-50%) scale(1.1) rotate(2deg);
+  }
+  75% {
+    transform: translateX(-50%) scale(1.1) rotate(-1deg);
+  }
+}
+
+@keyframes scaleUpAndWobble {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 1;
+  }
+  60% { 
+    transform: translate(-50%, -50%) scale(1.25);
+    opacity: 1;
+  }
+  70% { transform: translate(-50%, -50%) scale(1.25) rotate(-3deg); }
+  80% { transform: translate(-50%, -50%) scale(1.25) rotate(2deg); }
+  90% { transform: translate(-50%, -50%) scale(1.25) rotate(-1deg); }
+  100% { transform: translate(-50%, -50%) scale(1.25) rotate(0deg); opacity: 1;}
+}
